@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="slider">
+    <div class="slides">
+        <img src="https://i.pinimg.com/736x/4f/4a/a8/4f4aa822c6c1f83747d1ba4cee863caf.jpg" alt="Image 1">
+        <img src="https://i.pinimg.com/736x/bd/83/5f/bd835ffa6c8e86688bafa610c1695edf.jpg" alt="Image 2">
+        <img src="https://i.pinimg.com/736x/7d/35/5c/7d355ccadbe1c41ea4730a08217acaf0.jpg" alt="Image 3">
+        <img src="https://i.pinimg.com/736x/f0/c2/55/f0c255fa15673d01da09e9db088fa2ec.jpg" alt="Image 4">
+        <img src="https://i.pinimg.com/736x/da/bc/bf/dabcbf8921f1bb5adc9642e41a14e27f.jpg" alt="Image 5">
+    </div>
+    <div class="controls">
+        <button id="prev">&#8249; Назад</button>
+        <button id="next">Вперед &#8250;</button>
+    </div>
+    <div class="indicator" id="indicator">Изображение 1 из 5</div>
+</div>
+
+<script>
+    const slides = document.querySelector('.slides');
+    const images = document.querySelectorAll('.slides img');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const indicator = document.getElementById('indicator');
+
+    let currentIndex = 0;
+    const totalImages = images.length;
+
+    function updateSlider() {
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        indicator.textContent = `Изображение ${currentIndex + 1} из ${totalImages}`;
+    }
+
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalImages;
+        updateSlider();
+    });
+
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        updateSlider();
+    });
+
+    updateSlider();
+</script>
+
+</body>
+</html>
